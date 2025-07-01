@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comparativa de Productos Amazon</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    h1 {
+      color: #e47911;
+    }
+    .producto {
+      display: flex;
+      gap: 1rem;
+      border: 1px solid #ccc;
+      padding: 1rem;
+      background-color: #fff;
+      margin-bottom: 2rem;
+      border-radius: 8px;
+      align-items: center;
+    }
+    .producto img {
+      max-width: 300px;
+      height: auto;
+      border-radius: 8px;
+    }
+    .producto-texto {
+      flex: 1;
+    }
+	.boton-amazon {
+	  display: inline-block;
+	  margin: 1rem auto 0;
+	  padding: 0.6rem 1.2rem;
+	  background-color: #ffa41c;
+	  color: #000;
+	  font-weight: bold;
+	  border-radius: 4px;
+	  text-decoration: none;
+	  text-align: center;
+	  transition: transform 0.2s ease, background-color 0.3s ease;
+	}
+
+	.boton-amazon:hover {
+	  background-color: #ff8c00;
+	  transform: scale(1.05);
+	}
+    .boton-contenedor {
+      text-align: center;
+    }
+    .comparativa {
+      background-color: #eef6ff;
+      border-left: 5px solid #2196f3;
+      padding: 1rem;
+      border-radius: 8px;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+    .mini {
+      width: 100px;
+      height: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 0.5rem;
+      vertical-align: top;
+      background-color: #fff;
+    }
+    th {
+      background-color: #dceeff;
+    }
+    ul {
+      padding-left: 1.2rem;
+    }
+    a {
+      color: #0066c0;
+      text-decoration: none;
+    }
+    .ir-producto {
+      margin-top: 0.5rem;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="titulo-producto"></h1>
+  <div class="producto">
+    <a id="enlace-imagen-principal" href="#" target="_blank">
+      <img id="imagen-principal" src="" alt="Imagen producto principal">
+    </a>
+    <div class="producto-texto">
+      <p id="descripcion"></p>
+      <div class="boton-contenedor">
+        <a id="enlace-compra" class="boton-amazon" href="#" target="_blank">Comprar en Amazon</a>
+      </div>
+    </div>
+  </div>
+  <div class="comparativa">
+    <h2>Comparativa frente a otros altavoces inteligentes</h2>
+    <table id="tabla-comparativa">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Imagen</th>
+          <th>Pros</th>
+          <th>Contras</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+  <script>
+    const productos = {
+      "Echo Dot 5.ª Gen": {
+        titulo: "Echo Dot (5.ª generación) - Altavoz inteligente con Alexa",
+        imagen: "https://m.media-amazon.com/images/I/61KIy6gX-CL._AC_SL1000_.jpg",
+        descripcion: "El Echo Dot de 5.ª generación es el altavoz inteligente más vendido de Amazon. Con un diseño compacto y elegante, ofrece un sonido mejorado con voces más nítidas y graves más intensos. Incorpora Alexa, que permite controlar dispositivos del hogar, reproducir música, establecer recordatorios y obtener información con solo usar la voz. Además, su sensor de temperatura permite automatizaciones útiles en el hogar.",
+        enlace: "https://www.amazon.es/dp/B09B8V1LZ3?tag=tu-codigo-afiliado",
+        comparativa: [
+          {
+            nombre: "Echo Dot 5.ª Gen",
+            imagen: "https://m.media-amazon.com/images/I/61KIy6gX-CL._AC_SL1000_.jpg",
+            enlace: "https://www.amazon.es/dp/B09B8V1LZ3?tag=tu-codigo-afiliado",
+            pros: [
+              "Excelente calidad de sonido",
+              "Amplia compatibilidad con dispositivos",
+              "Integración sólida con Alexa",
+              "Diseño compacto y moderno",
+              "Sensor de temperatura integrado"
+            ],
+            contras: [
+              "No incluye control por infrarrojos",
+              "Dependencia del ecosistema Amazon"
+            ]
+          },
+          {
+            nombre: "Google Nest Mini",
+            imagen: "https://m.media-amazon.com/images/I/71Z1cBN-TdL._AC_SL1500_.jpg",
+            enlace: "https://www.amazon.es/dp/B07W7X2KK1?tag=tu-codigo-afiliado",
+            pros: [
+              "Buena integración con servicios de Google",
+              "Diseño compacto y elegante",
+              "Reconocimiento de voz preciso"
+            ],
+            contras: [
+              "Calidad de sonido inferior",
+              "Menor compatibilidad con dispositivos domóticos"
+            ]
+          },
+          {
+            nombre: "Xiaomi Smart Speaker IR Control",
+            imagen: "https://m.media-amazon.com/images/I/61lZZ0Wzg-L._AC_SL1500_.jpg",
+            enlace: "https://www.amazon.es/dp/B09X1G1T8N?tag=tu-codigo-afiliado",
+            pros: [
+              "Buena relación calidad-precio",
+              "Control infrarrojo de dispositivos",
+              "Compatible con comandos por voz"
+            ],
+            contras: [
+              "Ecosistema más limitado",
+              "Calidad de sonido inferior al Echo Dot",
+              "Asistente menos desarrollado"
+            ]
+          }
+        ]
+      }
+    };
+
+    const clave = "Echo Dot 5.ª Gen";
+    const producto = productos[clave];
+
+    document.getElementById("titulo-producto").textContent = producto.titulo;
+    document.getElementById("imagen-principal").src = producto.imagen;
+    document.getElementById("enlace-imagen-principal").href = producto.enlace;
+    document.getElementById("descripcion").textContent = producto.descripcion;
+    document.getElementById("enlace-compra").href = producto.enlace;
+
+    const tbody = document.querySelector("#tabla-comparativa tbody");
+    producto.comparativa.forEach(item => {
+      const row = document.createElement("tr");
+
+      const tdNombre = document.createElement("td");
+      tdNombre.innerHTML = `<strong>${item.nombre}</strong><br><a class='ir-producto' href='${item.enlace}' target='_blank'>Ir al producto</a>`;
+
+      const tdImagen = document.createElement("td");
+      tdImagen.innerHTML = `<a href='${item.enlace}' target='_blank'><img class='mini' src='${item.imagen}' alt='${item.nombre}'></a>`;
+
+      const tdPros = document.createElement("td");
+      tdPros.innerHTML = `<ul>${item.pros.map(pro => `<li>${pro}</li>`).join('')}</ul>`;
+
+      const tdContras = document.createElement("td");
+      tdContras.innerHTML = `<ul>${item.contras.map(con => `<li>${con}</li>`).join('')}</ul>`;
+
+      row.appendChild(tdNombre);
+      row.appendChild(tdImagen);
+      row.appendChild(tdPros);
+      row.appendChild(tdContras);
+      tbody.appendChild(row);
+    });
+  </script>
+</body>
+</html>
